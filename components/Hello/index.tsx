@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState} from "react";
-import api from "@/services/api";
+import api from "@/services/api_weather";
 
 const Hello: React.FC = () => {
   const [message, setMessage] = useState("");
