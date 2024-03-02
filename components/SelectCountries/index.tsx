@@ -9,7 +9,11 @@ interface ICountryData {
     }
 }
 
-export default function Select(props:SelectHTMLAttributes<HTMLSelectElement>){
+interface ISelect extends SelectHTMLAttributes<HTMLSelectElement> {
+    helpertext: string;
+}
+
+export default function Select(props:ISelect){
     const [contries, setContries] = useState([""])
 
     async function getAllContries(){
@@ -37,6 +41,7 @@ export default function Select(props:SelectHTMLAttributes<HTMLSelectElement>){
                     })
                 }
             </select>
+            {props.helpertext && <span className="text-red-500 font-light text-sm">{props.helpertext}</span>}
         </div>
     )
 }

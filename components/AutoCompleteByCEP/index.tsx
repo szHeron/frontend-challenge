@@ -1,4 +1,4 @@
-import api_cep from "@/services/api_cep";
+import { GetCep } from "@/utils/getcep";
 import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 
 interface ITextField extends InputHTMLAttributes<HTMLInputElement>{
@@ -9,13 +9,8 @@ interface ITextField extends InputHTMLAttributes<HTMLInputElement>{
     autoCompleteLocation: (state: string, city: string) => void;
 }
 
-interface ICEP {
-    localidade: string;
-    uf: string;
-}
-
 export default function AutoCompleteByCEP({onChangeCep, autoCompleteLocation, value, placeholder, helperText, labelText, width}: ITextField){
-    const [errorText, setErrorText] = useState(helperText)
+    const [errorText, setErrorText] = useState("")
 
     function handleCepChange(event: ChangeEvent<HTMLInputElement>){
         const notFormattedCep = event.target.value
@@ -26,16 +21,19 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteLocation, va
         onChangeCep(formattedCep)
     }
 
-    async function getCEP(){
-        try {
-            const response = await api_cep.get(`/${value}/json/`)
-            const cepData: ICEP = response.data
+    async function ValidationCEP(){
+        if(typeof value !== "string")
+            return
 
-            autoCompleteLocation(cepData.uf, cepData.localidade)
-            setErrorText("")
-        }catch(e){ 
+        const cepData = await GetCep(value);
+
+        if(!cepData){
             setErrorText("CEP inválido!")
+            return;
         }
+
+        autoCompleteLocation(cepData.uf, cepData.localidade)
+        setErrorText("")
     }
 
     return ( 
@@ -44,10 +42,15 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteLocation, va
                 {labelText}
             </label>
             <input onChange={handleCepChange} value={value} type="text" placeholder={placeholder} maxLength={9} className={`bg-gray-50 border ${errorText?"border-red-500":"border-gray-300"} text-gray-900 text-sm rounded-lg w-full p-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500`} />
-            {errorText && <span className="text-red-500">{errorText}</span>}
+            {
+               (errorText || helperText) && 
+                    <span className="text-red-500 font-light text-sm">
+                        {errorText?errorText:helperText}
+                    </span>
+            }
             {
                 typeof value === "string" && value.length > 7 && (
-                    <button onClick={getCEP}>
+                    <button type="button" onClick={ValidationCEP}>
                         <p className="text-blue-600 font-light underline">Completar endereço</p>
                     </button>
                 )

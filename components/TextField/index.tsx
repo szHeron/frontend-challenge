@@ -13,7 +13,7 @@ export default function TextField({onChange, type="text", placeholder, value, he
                 {labelText}
             </label>
             <input onChange={onChange} type={type} value={value} maxLength={maxLength} placeholder={placeholder} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500" />
-            {helperText && <span>{helperText}</span>}
+            {helperText && <span className="text-red-500 font-light text-sm">{helperText}</span>}
         </div>
     )
 }
