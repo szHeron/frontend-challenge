@@ -29,8 +29,8 @@ export default function Select(props:SelectHTMLAttributes<HTMLSelectElement>){
     return(
         <div className="flex flex-col w-full">
             <label className="block mb-2 text-sm font-medium text-gray-900">País</label>
-            <select {...props} className="bg-gray-50 border block w-full p-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
-                <option selected>Escolha o pais</option>
+            <select defaultValue={"Escolha o pais"} {...props} className="bg-gray-50 border block w-full p-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                <option value="null">Escolha o pais</option>
                 {
                     contries.map((item, index)=>{
                         return <option key={index} value={item}>{item}</option>
