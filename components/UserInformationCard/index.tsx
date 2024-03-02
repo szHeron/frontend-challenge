@@ -1,11 +1,11 @@
 import Image from "next/image"
-import profile from "../../public/file.png"
+import logo from "../../public/logo.jpg"
 
 export default function UserInformationCard(){
     return (
         <div className="flex flex-col bg-blue-500 w-1/5 h-full rounded-lg items-center py-8 px-4">
             <div className="flex flex-col items-center">
-                <Image className="rounded-full" src={profile} width={120} height={120} alt="Foto de perfil" />
+                <Image className="rounded-full" src={logo} width={120} height={120} alt="Foto de perfil" />
                 <p className="text-white font-medium my-2">Heron Rodrigues de Oliveira</p>
             </div>
             <div className="flex flex-col items-start gap-4">
@@ -22,7 +22,7 @@ export default function UserInformationCard(){
                     <p className="text-white font-medium">Russas, CE - Brasil</p>
                 </div>
                 <div className="flex flex-row gap-4">
-                    <svg fill="#fff" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M24 23h-24v-13.275l2-1.455v-7.27h20v7.272l2 1.453v13.275zm-20-10.472v-9.528h16v9.527l-8 5.473-8-5.472zm14-.528h-12v-1h12v1zm0-3v1h-12v-1h12zm-7-1h-5v-3h5v3zm7 0h-6v-1h6v1zm0-2h-6v-1h6v1z"/></svg>
+                    <svg fill="#fff" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M24 23h-24v-13.275l2-1.455v-7.27h20v7.272l2 1.453v13.275zm-20-10.472v-9.528h16v9.527l-8 5.473-8-5.472zm14-.528h-12v-1h12v1zm0-3v1h-12v-1h12zm-7-1h-5v-3h5v3zm7 0h-6v-1h6v1zm0-2h-6v-1h6v1z"/></svg>
                     <p className="text-white font-medium">Messagem</p>
                 </div>
             </div>
