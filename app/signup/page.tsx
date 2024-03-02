@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import Image from "next/image";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation"
 import illustration from "@/assets/illustration_weather.svg"
 import FormValidation from "@/utils/formvalidation";
 import Form from "@/components/Form";
@@ -42,7 +42,7 @@ export default function Signup() {
     const result = await FormValidation(user, confirmPassword)
 
     if(!result){
-      router.push('/')
+      router.push('/success')
     }else{
       setErros(result)
     }
