@@ -1,7 +1,7 @@
 "use client"
 
 import api_countries from "@/services/api_countries"
-import { useEffect, useState } from "react"
+import { SelectHTMLAttributes, useEffect, useState } from "react"
 
 interface ICountryData {
     name: {
@@ -9,7 +9,7 @@ interface ICountryData {
     }
 }
 
-export default function Select(){
+export default function Select(props:SelectHTMLAttributes<HTMLSelectElement>){
     const [contries, setContries] = useState([""])
 
     async function getAllContries(){
@@ -29,7 +29,7 @@ export default function Select(){
     return(
         <div className="flex flex-col w-full">
             <label className="block mb-2 text-sm font-medium text-gray-900">País</label>
-            <select className="bg-gray-50 border block w-full p-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+            <select {...props} className="bg-gray-50 border block w-full p-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                 <option selected>Escolha o pais</option>
                 {
                     contries.map((item, index)=>{
