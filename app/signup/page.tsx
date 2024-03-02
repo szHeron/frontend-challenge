@@ -6,6 +6,7 @@ import illustration from "@/assets/illustration_weather.svg"
 import TextField from "@/components/TextField";
 import FormValidation from "@/utils/formvalidation";
 import VerifyStrongPassword from "@/components/VerifyStrongPassword";
+import Select from "@/components/SelectCountries";
 
 export interface IUser {
   name: string;
@@ -55,19 +56,20 @@ export default function Signup() {
           </span>
         </div>
         <form onSubmit={handleValidation} className="flex flex-col gap-2 w-1/2">
-          <TextField onChange={text => setUser({...user, name: text.target.value})} labelText="Nome" placeholder="Seu nome"/>
-          <TextField onChange={text => setUser({...user, email: text.target.value})} labelText="Email" placeholder="Seu email"/>
-          <TextField onChange={text => setUser({...user, password: text.target.value})} labelText="Senha" placeholder="Sua senha"/>
+          <TextField onChange={text => setUser({...user, name: text.target.value})} labelText="Nome" placeholder="John doe"/>
+          <TextField onChange={text => setUser({...user, email: text.target.value})} labelText="Email" placeholder="Johndoe@email.com"/>
+          <TextField onChange={text => setUser({...user, password: text.target.value})} type="password" labelText="Senha" placeholder="*********"/>
           <VerifyStrongPassword password={user.password}/>
-          <TextField onChange={text => setConfirmPassword(text.target.value)} labelText="Confirmar senha" placeholder="Repita sua senha"/>
+          <TextField onChange={text => setConfirmPassword(text.target.value)} type="password" labelText="Confirmar senha" placeholder="*********"/>
           <div className="flex flex-row gap-2">
             <TextField onChange={text => setUser({...user, address: text.target.value})} labelText="Endereço" placeholder="Sua rua"/>
-            <TextField onChange={text => setUser({...user, cep: text.target.value})} labelText="CEP" placeholder="Seu CEP" width="1/4"/>
+            <TextField onChange={text => setUser({...user, cep: text.target.value})} labelText="CEP" placeholder="00000-000" width="1/4"/>
           </div>
           <div className="flex flex-row gap-2">
             <TextField onChange={text => setUser({...user, city: text.target.value})} labelText="Cidade" placeholder="Sua cidade"/>
             <TextField onChange={text => setUser({...user, state: text.target.value})} labelText="Estado" placeholder="Seu estado"/>
-            <TextField onChange={text => setUser({...user, country: text.target.value})} labelText="Pais" placeholder="Seu pais"/>
+            {/* <TextField onChange={text => setUser({...user, country: text.target.value})} labelText="Pais" placeholder="Seu pais"/> */}
+            <Select/>
           </div>
           <TextField onChange={text => setUser({...user, message: text.target.value})} labelText="Mensagem" placeholder="Escreva sua mensagem"/>
           <button type="submit" className="text-white font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300">
