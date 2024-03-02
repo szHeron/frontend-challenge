@@ -3,21 +3,11 @@
 import { FormEvent, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation"
+import useUser from "@/hooks/useUser";
 import illustration from "@/assets/illustration_weather.svg"
 import FormValidation from "@/utils/formvalidation";
 import Form from "@/components/Form";
-
-export interface IUser {
-  name: string;
-  email: string;
-  password: string;
-  address: string;
-  cep: string;
-  state: string;
-  city: string;
-  country: string;
-  message: string;
-}
+import { IUser } from "@/context/UserContext";
 
 const initialState: IUser = {
   name: "",
@@ -35,6 +25,7 @@ export default function Signup() {
   const [user, setUser] = useState<IUser>(initialState)
   const [confirmPassword, setConfirmPassword] = useState("")
   const [erros, setErros] = useState(initialState)
+  const { handleAddUser } = useUser();
   const router = useRouter()
 
   async function handleValidation(event: FormEvent){
@@ -42,6 +33,7 @@ export default function Signup() {
     const result = await FormValidation(user, confirmPassword)
 
     if(!result){
+      handleAddUser(user)
       router.push('/success')
     }else{
       setErros(result)

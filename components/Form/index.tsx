@@ -1,5 +1,5 @@
 import { Dispatch, FormEvent, SetStateAction } from "react";
-import { IUser } from "@/app/signup/page";
+import { IUser } from "@/context/UserContext";
 import AutoCompleteByCEP from "../AutoCompleteByCEP";
 import SelectCountries from "../SelectCountries";
 import TextField from "../TextField";

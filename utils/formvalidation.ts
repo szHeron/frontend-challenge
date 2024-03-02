@@ -1,4 +1,4 @@
-import { IUser } from "@/app/signup/page";
+import { IUser } from "@/context/UserContext";
 import { GetCep } from "./getcep";
 
 export default async function FormValidation(user: IUser, confirmPassword: string){
@@ -30,7 +30,7 @@ export default async function FormValidation(user: IUser, confirmPassword: strin
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)){
         erros.email = "Erro: Email inválido."
     }
-    if(user.password.trim().length > 0){
+    if(user.password.includes(" ")){
         erros.password = "Erro: Senha não pode possui espaços."
     }else if(user.password.length < 8 ){
         erros.password = "Erro: Senha pequena."
@@ -59,6 +59,7 @@ export default async function FormValidation(user: IUser, confirmPassword: strin
     }
 
     const checker = Object.values(erros).find((value) => value.length > 0)
+    
     if(checker !== undefined && checker.length > 0){
         return erros
     }else{
