@@ -83,6 +83,7 @@ export default function Form({handleValidation, setUser, user, setConfirmPasswor
                     labelText="Estado" 
                     placeholder="UF" 
                     helperText={erros.state}
+                    maxLength={2}
                 />
                 <SelectCountries onChange={(value)=> setUser({...user, country: value.target.value})} helpertext={erros.country}/>
             </div>
