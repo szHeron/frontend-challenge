@@ -48,13 +48,9 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteLocation, va
                         {errorText?errorText:helperText}
                     </span>
             }
-            {
-                typeof value === "string" && value.length > 7 && (
-                    <button type="button" onClick={ValidationCEP}>
-                        <p className="text-blue-600 font-light underline">Completar endereço</p>
-                    </button>
-                )
-            }
+            <button type="button" onClick={ValidationCEP}>
+                <p className="text-blue-600 font-light underline">Completar endereço</p>
+            </button>
         </div>
     )
 }
