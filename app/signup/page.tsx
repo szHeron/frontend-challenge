@@ -25,11 +25,13 @@ export default function Signup() {
   const [user, setUser] = useState<IUser>(initialState)
   const [confirmPassword, setConfirmPassword] = useState("")
   const [erros, setErros] = useState(initialState)
+  const [loading, setLoading] = useState(false)
   const { handleAddUser } = useUser();
   const router = useRouter()
 
   async function handleValidation(event: FormEvent){
     event.preventDefault()
+    setLoading(true)
     const result = await FormValidation(user, confirmPassword)
 
     if(!result){
@@ -38,6 +40,7 @@ export default function Signup() {
     }else{
       setErros(result)
     }
+    setLoading(false)
   }
 
   return (
@@ -54,7 +57,7 @@ export default function Signup() {
             Preencha o formulário abaixo!
           </span>
         </div>
-        <Form handleValidation={handleValidation} setUser={setUser} user={user} setConfirmPassword={setConfirmPassword} confirmPassword={confirmPassword} erros={erros}/>
+        <Form handleValidation={handleValidation} setUser={setUser} user={user} setConfirmPassword={setConfirmPassword} confirmPassword={confirmPassword} erros={erros} loading={loading}/>
       </main>
     </div>
   );

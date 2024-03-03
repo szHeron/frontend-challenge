@@ -13,23 +13,16 @@ export default async function FormValidation(user: IUser, confirmPassword: strin
         country: "",
         message: ""
     }
-
-    if(user.cep.length < 8){
-        erros.cep = "Erro: CEP inválido."
-    }
-
     const cepData = await GetCep(user.cep)
-
-    if(!cepData){
-        erros.cep = "Erro: CEP inválido."
-    }
 
     if(user.name.length < 3){
         erros.name = "Erro: Nome inválido."
     }
+
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)){
         erros.email = "Erro: Email inválido."
     }
+
     if(user.password.includes(" ")){
         erros.password = "Erro: Senha não pode possui espaços."
     }else if(user.password.length < 8 ){
@@ -39,22 +32,36 @@ export default async function FormValidation(user: IUser, confirmPassword: strin
     }else if(user.password.match(/[a-zA-Z]/) === null){
         erros.password = "Erro: Está faltando uma letra na senha."
     }
+
     if(user.password !== confirmPassword){
         erros.password = "Erro: As senhas não coincidem."
     }
+
     if(user.address.length < 3){
         erros.address = "Erro: Endereço inválido."
     }
+
+    if(user.cep.length < 8){
+        erros.cep = "Erro: CEP inválido."
+    }
+
+    if(!cepData){
+        erros.cep = "Erro: CEP inválido."
+    }
+
     if(cepData?.localidade !== user.city){
         erros.city = "Erro: Cidade diferente do CEP."
     }
+
     if(cepData?.uf.toUpperCase() !== user.state.toUpperCase()){
         erros.state = "Erro: Estado diferente do CEP."
     }
-    if(user.country.length < 3){
+
+    if(user.country.length < 3 || user.country.includes("null")){
         erros.country = "Erro: país inválido."
     }
-    if(user.message.length < 3){
+
+    if(user.message.length < 1){
         erros.message = "Erro: mensagem inválida."
     }
 
@@ -65,5 +72,4 @@ export default async function FormValidation(user: IUser, confirmPassword: strin
     }else{
         return null
     }
-
 }
