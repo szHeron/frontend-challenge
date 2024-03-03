@@ -6,8 +6,8 @@ import UserContextProvider from "@/context/UserContext"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "App Title",
-  description: "Good luck!",
+  title: "Formulario",
+  description: "Previsão meteorologica.",
 };
 
 export default function RootLayout({
