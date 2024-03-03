@@ -56,9 +56,9 @@ export default function Home() {
 
   useEffect(()=>{
     async function getForecastWeather(){
-      const responseForecast = await api_weather.get(`/forecast/daily?q=${"Fortaleza"}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
-      const responseCurrentWeather = await api_weather.get(`/weather?q=${"Fortaleza"}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
-      setForecastWeather(responseForecast.data.list)
+      const responseForecast = await api_weather.get(`/forecast?q=${user.city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
+      const responseCurrentWeather = await api_weather.get(`/weather?q=${user.city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
+      setForecastWeather(responseForecast.data.list.slice(1, 9))
       setCurrentWeather(responseCurrentWeather.data)
       setLoading(false)
     }
