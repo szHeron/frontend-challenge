@@ -17,7 +17,7 @@ interface IForm {
 
 export default function Form({handleValidation, setUser, user, setConfirmPassword, confirmPassword, erros, loading}: IForm){
     return (
-        <form onSubmit={handleValidation} className="flex flex-col gap-2 w-2/4">
+        <form onSubmit={handleValidation} className="flex flex-col gap-2 w-[90%] xl:w-2/4">
             <TextField 
                 onChange={text => setUser({...user, name: text.target.value})} 
                 value={user.name} 
