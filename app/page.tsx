@@ -55,21 +55,23 @@ export default function Home() {
   const router = useRouter()
 
   useEffect(()=>{
-      async function getForecastWeather(){
-        const responseForecast = await api_weather.get(`/forecast/daily?q=${"Fortaleza"}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
-        const responseCurrentWeather = await api_weather.get(`/weather?q=${"Fortaleza"}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
-        setForecastWeather(responseForecast.data.list)
-        setCurrentWeather(responseCurrentWeather.data)
-        setLoading(false)
-      }
+    async function getForecastWeather(){
+      const responseForecast = await api_weather.get(`/forecast/daily?q=${"Fortaleza"}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
+      const responseCurrentWeather = await api_weather.get(`/weather?q=${"Fortaleza"}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
+      setForecastWeather(responseForecast.data.list)
+      setCurrentWeather(responseCurrentWeather.data)
+      setLoading(false)
+    }
 
-      if(currentWeather.coord.lon === 0){
-        getForecastWeather()
-      }
-  }, [currentWeather, forecastWeather, setLoading])
+    if(!user.name)
+      router.push('/signup')
 
-  if(!user.name)
-    router.push('/signup')
+    if(currentWeather.coord.lon === 0){
+      getForecastWeather()
+    }
+  }, [currentWeather, forecastWeather, setLoading, router, user])
+
+  
 
   if(loading){
     return (
