@@ -49,11 +49,11 @@ export default async function FormValidation(user: IUser, confirmPassword: strin
         erros.cep = "Erro: CEP inválido."
     }
 
-    if(cepData?.localidade !== user.city){
+    if(cepData?.localidade.toLowerCase() !== user.city.toLowerCase()){
         erros.city = "Erro: Cidade diferente do CEP."
     }
 
-    if(cepData?.uf.toUpperCase() !== user.state.toUpperCase()){
+    if(cepData?.uf.toLowerCase() !== user.state.toLowerCase()){
         erros.state = "Erro: Estado diferente do CEP."
     }
 
