@@ -17,7 +17,7 @@ interface IForm {
 
 export default function Form({handleValidation, setUser, user, setConfirmPassword, confirmPassword, erros, loading}: IForm){
     return (
-        <form onSubmit={handleValidation} className="flex flex-col gap-2 w-3/4">
+        <form onSubmit={handleValidation} className="flex flex-col gap-2 w-2/4">
             <TextField 
                 onChange={text => setUser({...user, name: text.target.value})} 
                 value={user.name} 
@@ -59,6 +59,7 @@ export default function Form({handleValidation, setUser, user, setConfirmPasswor
                     labelText="Endereço" 
                     placeholder="Sua rua" 
                     helperText={erros.address}
+                    maxLength={100}
                 />
                 <AutoCompleteByCEP 
                     onChangeCep={text => setUser({...user, cep: text})} 
@@ -77,6 +78,7 @@ export default function Form({handleValidation, setUser, user, setConfirmPasswor
                     labelText="Cidade" 
                     placeholder="Sua cidade" 
                     helperText={erros.city}
+                    maxLength={50}
                 />
                 <TextField 
                     onChange={text => setUser({...user, state: text.target.value})} 
@@ -94,6 +96,7 @@ export default function Form({handleValidation, setUser, user, setConfirmPasswor
                 labelText="Mensagem" 
                 placeholder="Escreva sua mensagem" 
                 helperText={erros.message}
+                maxLength={300}
             />
             <button disabled={loading} type="submit" className="flex justify-center text-white font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300">
                 {

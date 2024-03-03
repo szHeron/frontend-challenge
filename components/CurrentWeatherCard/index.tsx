@@ -1,9 +1,9 @@
 import Image from "next/image"
-import cloudy from "@/public/nublado.png"
-import rain from "@/public/chuva.png"
-import thunderstorm from "@/public/tempestade.png"
-import sun from "@/public/ensolarado.png"
-import { IWeather } from "../WeatherForecast"
+import cloudy from "@/assets/nublado.png"
+import rain from "@/assets/chuva.png"
+import thunderstorm from "@/assets/tempestade.png"
+import sun from "@/assets/ensolarado.png"
+import { IWeather } from "@/app/page"
 
 export default function CurrentWeatherCard({data, city, state}: {data: IWeather, city: string, state: string}){
     const weather = data.weather[0].main.toLowerCase()
