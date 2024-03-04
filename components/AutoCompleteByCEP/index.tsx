@@ -1,4 +1,5 @@
 import { GetCep } from "@/utils/getcep";
+import { getCepFromLocation } from "@/utils/getcepfromlocation";
 import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 
 interface ITextField extends InputHTMLAttributes<HTMLInputElement>{
@@ -35,6 +36,17 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteCep, value, 
         setErrorText("")
     }
 
+    async function handleGetCepByLocalization(){
+        const cep = await getCepFromLocation()
+
+        if(cep){
+            onChangeCep(cep)
+            validationCep(cep)
+        }else{
+            setErrorText('Erro ao buscar CEP')
+        }
+    }
+
     return ( 
         <div className={`flex flex-col w-${width?width:"full"}`}>
             <label className="block mb-2 text-sm font-medium text-gray-900">
@@ -47,6 +59,9 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteCep, value, 
                         {errorText?errorText:helperText}
                     </span>
             }
+            <button className="text-blue-500" type="button" onClick={handleGetCepByLocalization}>
+                Buscar CEP
+            </button>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import api_countries from "@/services/api_countries"
+import api_countries from "@/services/api_countries";
 import { SelectHTMLAttributes, useEffect, useState } from "react"
 
 interface ICountryData {
