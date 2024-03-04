@@ -8,6 +8,9 @@ interface ICEP {
 
 export async function GetCep(cep: string){
     try {
+        if(cep.length < 8)
+            return null
+        
         const response = await api_cep.get(`/${cep}/json/`)
         const cepData: ICEP = response.data
         if(cepData.erro === "true")
