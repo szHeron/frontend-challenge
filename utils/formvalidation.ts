@@ -56,7 +56,7 @@ export default async function FormValidation(user: IUser, confirmPassword: strin
     if(cepData?.uf.toLowerCase() !== user.state.toLowerCase()){
         erros.state = "Erro: Estado diferente do CEP."
     }
-
+    //utilizo somente o Brasil como válido pois o CEP só funciona de forma nacional, não abrangendo outros paises.
     if(user.country.length < 3 || !user.country.toLowerCase().includes("brazil")){
         erros.country = "Erro: país inválido."
     }

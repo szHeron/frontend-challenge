@@ -19,13 +19,14 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteLocation, va
         .replace(/(-\d{3})\d+?$/, '$1')
 
         onChangeCep(formattedCep)
+
+        if(formattedCep.length === 9){
+            validationCep(notFormattedCep.replace("-",""))
+        }
     }
 
-    async function ValidationCEP(){
-        if(typeof value !== "string")
-            return
-
-        const cepData = await GetCep(value);
+    async function validationCep(cep: string){
+        const cepData = await GetCep(cep);
 
         if(!cepData){
             setErrorText("CEP inválido!")
@@ -48,9 +49,6 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteLocation, va
                         {errorText?errorText:helperText}
                     </span>
             }
-            <button type="button" onClick={ValidationCEP}>
-                <p className="text-blue-600 font-light underline">Completar endereço</p>
-            </button>
         </div>
     )
 }

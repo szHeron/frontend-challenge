@@ -9,8 +9,9 @@ export default function UserInformationCard({user}:{user:IUser}){
                 <Image className="rounded-full" src={logo} width={120} height={120} alt="Foto de perfil" />
                 <p className="text-white font-medium my-2">{user.name}</p>
             </div>
-            <div className="flex flex-col items-start gap-4 text-white font-light">
-                <div className="flex flex-row gap-4 mt-8 items-center">
+            <div className="flex flex-col items-start gap-4 text-white font-light mt-8">
+                <p className="font-normal self-center">Resumo</p>
+                <div className="flex flex-row gap-4 items-center">
                     <svg fill="#fff" height="20" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M24 21h-24v-18h24v18zm-23-16.477v15.477h22v-15.477l-10.999 10-11.001-10zm21.089-.523h-20.176l10.088 9.171 10.088-9.171z"/></svg>
                     <p>{user.email}</p>
                 </div>
