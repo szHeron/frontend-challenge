@@ -24,15 +24,15 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteCep, value, 
         if(cep.length < 8)
             return;
 
-            const cepData = await GetCep(cep);
+        const cepData = await GetCep(cep);
 
-            if(!cepData){
-                setErrorText("CEP inválido!")
-                return;
-            }
-    
-            autoCompleteCep(cepData.uf, cepData.localidade, cep)
-            setErrorText("")
+        if(!cepData){
+            setErrorText("CEP inválido!")
+            return;
+        }
+
+        autoCompleteCep(cepData.uf, cepData.localidade, cep)
+        setErrorText("")
     }
 
     return ( 
