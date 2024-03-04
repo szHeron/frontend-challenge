@@ -22,12 +22,12 @@ export default function ForecastCard({data}:{data: IWeatherForecast}){
 
     function formatDate() {
         const date = new Date(data.dt_txt);
-        const hours = date.getHours();
-        const formattedHours = hours.toString().padStart(2, "0");
+        const formattedHours = date.getHours().toString().padStart(2, "0");
+        const formattedMinutes = date.getMinutes().toString().padStart(2, "0");
         const formattedDay = date.getDate().toString().padStart(2, "0");
         const formattedMonth = (date.getMonth() + 1).toString().padStart(2, "0");
         
-        return `${formattedHours}h - ${formattedDay}/${formattedMonth}`;
+        return `${formattedHours}:${formattedMinutes} - ${formattedDay}/${formattedMonth}`;
     }
       
     return (

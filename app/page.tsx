@@ -55,23 +55,36 @@ export default function Home() {
   const router = useRouter()
 
   useEffect(()=>{
-    async function getForecastWeather(){
-      const responseForecast = await api_weather.get(`/forecast?q=${user.city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
-      const responseCurrentWeather = await api_weather.get(`/weather?q=${user.city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)
-      setForecastWeather(responseForecast.data.list.slice(1, 9))
-      setCurrentWeather(responseCurrentWeather.data)
+    async function getWeather(){
+      const responseForecast: IWeatherForecast[] = (await api_weather.get(`/forecast?q=${user.city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)).data.list
+      const responseCurrentWeather: IWeather = (await api_weather.get(`/weather?q=${user.city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)).data
+
+      let forecast = [...forecastWeather].slice(1)
+      let prevDay = new Date()
+
+      responseForecast.forEach(item => {
+        const day = new Date(item.dt_txt)
+
+        if(prevDay.getDay() < day.getDay()){
+          forecast.push(item)
+          prevDay = day
+        }
+      })
+
+      setForecastWeather(forecast)
+      setCurrentWeather(responseCurrentWeather)
       setLoading(false)
     }
 
-    if(!user.name)
+    if(user.name.length < 1){
       router.push('/signup')
+      return;
+    }
 
     if(currentWeather.coord.lon === 0){
-      getForecastWeather()
+      getWeather()
     }
   }, [currentWeather, forecastWeather, setLoading, router, user])
-
-  
 
   if(loading){
     return (
