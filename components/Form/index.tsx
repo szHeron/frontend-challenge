@@ -16,6 +16,10 @@ interface IForm {
 }
 
 export default function Form({handleValidation, setUser, user, setConfirmPassword, confirmPassword, erros, loading}: IForm){
+    function autoCompleteCep(city: string, state: string, cep: string){
+        setUser({...user, state, city, cep})
+    }
+
     return (
         <form onSubmit={handleValidation} className="flex flex-col gap-2 w-[90%] xl:w-2/4">
             <TextField 
@@ -63,10 +67,10 @@ export default function Form({handleValidation, setUser, user, setConfirmPasswor
                 />
                 <AutoCompleteByCEP 
                     onChangeCep={text => setUser({...user, cep: text})} 
-                    autoCompleteLocation={(state, city) => setUser({...user, state, city})} 
+                    autoCompleteCep={autoCompleteCep} 
                     value={user.cep} 
                     labelText="CEP" 
-                    placeholder="00000-000" 
+                    placeholder="00000000" 
                     width="1/4" 
                     helperText={erros.cep}
                 />
