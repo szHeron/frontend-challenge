@@ -16,7 +16,7 @@ interface IForm {
 }
 
 export default function Form({handleValidation, setUser, user, setConfirmPassword, confirmPassword, erros, loading}: IForm){
-    function autoCompleteCep(city: string, state: string, cep: string){
+    function autoCompleteCep(state: string, city: string, cep: string){
         setUser({...user, state, city, cep})
     }
 
