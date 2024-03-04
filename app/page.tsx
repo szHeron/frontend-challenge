@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import api_weather from "@/services/api_weather";
 import UserInformationCard from "@/components/UserInformationCard";
 import WeatherForecastBoard from "@/components/WeatherForecastBoard";
 import useUser from "@/hooks/useUser";
-import { useRouter } from "next/navigation";
 
 export interface IWeather {
   coord: {
@@ -67,8 +67,8 @@ export default function Home() {
         const day = new Date(item.dt_txt)
 
         if(prevDay.getDay() < day.getDay() && day.getHours() === 12){
-            forecastNextFiveDays.push(item)
-            prevDay = day
+          forecastNextFiveDays.push(item)
+          prevDay = day
         }
       })
 
