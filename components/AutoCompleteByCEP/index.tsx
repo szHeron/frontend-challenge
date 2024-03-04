@@ -13,17 +13,6 @@ interface ITextField extends InputHTMLAttributes<HTMLInputElement>{
 export default function AutoCompleteByCEP({onChangeCep, autoCompleteCep, value, placeholder, helperText, labelText, width}: ITextField){
     const [errorText, setErrorText] = useState("")
 
-    function handleCepChange(event: ChangeEvent<HTMLInputElement>){
-        const cep = event.target.value
-        if(/^\d+$/.test(cep) || cep.length === 0){
-            onChangeCep(cep)
-        }
-
-        if(cep.length === 8 )
-            validationCep(cep)
-            
-    }
-
     async function validationCep(cep: string){
         const cepData = await GetCep(cep);
 
@@ -34,6 +23,16 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteCep, value, 
 
         autoCompleteCep(cepData.uf, cepData.localidade, cep)
         setErrorText("")
+    }
+
+    function handleCepChange(event: ChangeEvent<HTMLInputElement>){
+        const cep = event.target.value
+        if(/^\d+$/.test(cep) || cep.length === 0){
+            onChangeCep(cep)
+        }
+
+        if(cep.length === 8 )
+            validationCep(cep)   
     }
 
     async function handleGetCepByLocalization(){
