@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation"
+import Image from "next/image";
+import logo from "../../assets/logo-horizontal.png"
 import useUser from "@/hooks/useUser";
 import FormValidation from "@/utils/formvalidation";
 import Form from "@/components/Form";
@@ -44,7 +46,8 @@ export default function Signup() {
   return (
     <main className="flex w-full flex-col justify-center items-center pt-8">
       <div className="flex flex-col items-center mb-6">
-        <h1 className="font-bold text-lg">
+        <Image width={150} height={150} src={logo} alt="Logo Imobilead"/>
+        <h1 className="font-bold text-lg mt-4">
           Olá, bem-vindo!
         </h1>
         <span>
