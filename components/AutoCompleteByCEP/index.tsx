@@ -39,8 +39,9 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteCep, value, 
         const cep = await getCepFromLocation()
 
         if(cep){
-            onChangeCep(cep)
-            validationCep(cep)
+            const formattedCep = cep.replace("-","")
+            onChangeCep(formattedCep)
+            validationCep(formattedCep)
         }else{
             setErrorText('Erro ao buscar CEP')
         }
