@@ -4,8 +4,8 @@ import { IUser } from "@/context/UserContext"
 
 export default function UserInformationCard({user}:{user:IUser}){
     return (
-        <div className="flex flex-col shadow-2xl bg-gradient-to-t from-[#0575E6] to-[#021B79] w-1/5 h-full rounded-lg items-center py-8 px-4">
-            <div className="flex flex-col items-center">
+        <div className="flex flex-col shadow-2xl bg-gradient-to-t from-[#73A8FF] to-[#1A58BE] w-1/5 h-full p-4">
+            <div className="flex flex-col items-center mt-4">
                 <Image className="rounded-full" src={logo} width={120} height={120} alt="Foto de perfil" />
                 <p className="text-white font-medium my-2">{user.name}</p>
             </div>

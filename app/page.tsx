@@ -48,9 +48,10 @@ const initialState = {
 }
 
 export default function Home() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [currentWeather, setCurrentWeather] = useState<IWeather>(initialState)
-  const [forecastWeather, setForecastWeather] = useState<IWeatherForecast[]>([{...initialState, dt_txt: ""}])
+  const [currentForecastWeather, setCurrentForecastWeather] = useState<IWeatherForecast[]>([{...initialState, dt_txt: ""}])
+  const [nextForecastWeather, setNextForestcastWeather] = useState<IWeatherForecast[]>([{...initialState, dt_txt: ""}])
   const {user} = useUser()
   const router = useRouter()
 
@@ -59,19 +60,20 @@ export default function Home() {
       const responseForecast: IWeatherForecast[] = (await api_weather.get(`/forecast?q=${user.city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)).data.list
       const responseCurrentWeather: IWeather = (await api_weather.get(`/weather?q=${user.city}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`)).data
 
-      let forecast = [...forecastWeather].slice(1)
+      let forecastNextFiveDays = [...nextForecastWeather].slice(1)
       let prevDay = new Date()
-
+  
       responseForecast.forEach(item => {
         const day = new Date(item.dt_txt)
 
-        if(prevDay.getDay() < day.getDay()){
-          forecast.push(item)
-          prevDay = day
+        if(prevDay.getDay() < day.getDay() && day.getHours() === 12){
+            forecastNextFiveDays.push(item)
+            prevDay = day
         }
       })
 
-      setForecastWeather(forecast)
+      setNextForestcastWeather(forecastNextFiveDays)
+      setCurrentForecastWeather(responseForecast.slice(0,5))
       setCurrentWeather(responseCurrentWeather)
       setLoading(false)
     }
@@ -84,7 +86,7 @@ export default function Home() {
     if(currentWeather.coord.lon === 0){
       getWeather()
     }
-  }, [currentWeather, forecastWeather, setLoading, router, user])
+  }, [currentWeather, currentForecastWeather, nextForecastWeather, setLoading, router, user])
 
   if(loading){
     return (
@@ -95,9 +97,9 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-row p-6 h-screen w-screen">
+    <main className="flex flex-row h-screen w-screen">
       <UserInformationCard user={user}/>
-      <WeatherForecastBoard city={user.city} state={user.state} currentWeather={currentWeather} forecastWeather={forecastWeather}/>
+      <WeatherForecastBoard city={user.city} state={user.state} currentWeather={currentWeather} currentForecastWeather={currentForecastWeather} nextForecastWeather={nextForecastWeather}/>
     </main>
   );
 }

@@ -1,24 +1,9 @@
 import Image from "next/image"
-import cloudy from "@/assets/nublado.png"
-import rain from "@/assets/chuva.png"
-import thunderstorm from "@/assets/tempestade.png"
-import sun from "@/assets/ensolarado.png"
 import { IWeather } from "@/app/page"
+import currentWeatherCondition from "@/utils/currentweathercondition"
 
 export default function CurrentWeatherCard({data, city, state}: {data: IWeather, city: string, state: string}){
     const weather = data.weather[0].main.toLowerCase()
-
-    function currentWeatherConditionImage(){
-        if(weather.includes("rain")){
-            return rain
-        }else if(weather.includes("thunderstorm")){
-            return thunderstorm
-        }else if(weather.indexOf("clouds") !== -1){
-            return cloudy
-        }else{
-            return sun
-        }
-    }
 
     function currentWeatherConditionTranslate(){
         if(weather.includes("rain")){
@@ -33,23 +18,20 @@ export default function CurrentWeatherCard({data, city, state}: {data: IWeather,
     }
     
     return (
-        <div className="flex flex-col text-white items-center h-full w-3/5 shadow-2xl bg-gradient-to-t from-[#0575E6] to-[#021B79] p-4 rounded-lg">
+        <div className="flex flex-col text-white items-center h-full w-full shadow-2xl bg-gradient-to-t from-[#73A8FF] to-[#1A58BE] p-4 rounded-lg">
             <h1 className="text-white font-medium text-lg self-start">
                 Tempo hoje
             </h1> 
             <div className="flex flex-col w-full h-full items-center justify-around">
                 <div className="flex flex-col items-center">
-                    <div className="flex flex-row gap-2">
-                        <svg fill="#fff" height="22" width="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M12 10c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2m0-5c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3m-7 2.602c0-3.517 3.271-6.602 7-6.602s7 3.085 7 6.602c0 3.455-2.563 7.543-7 14.527-4.489-7.073-7-11.072-7-14.527m7-7.602c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602"/></svg>
-                        <p>{city}, {state}</p>
+                    <p><span className="font-bold">{city}</span>, {state}</p>
+                    <Image width={180} height={180} src={currentWeatherCondition(weather)} alt="ilustração do tempo"/>
+                    <div>
+                        <h2 className="font-bold text-6xl">{data.main.temp.toFixed(0)}°</h2>
+                        <p className="font-light self-start">
+                            {currentWeatherConditionTranslate()}
+                        </p>
                     </div>
-                    <div className="flex flex-row items-center">
-                        <Image width={90} height={90} src={currentWeatherConditionImage()} alt="ilustração do tempo"/>
-                        <h2 className="font-bold text-6xl">{data.main.temp.toFixed(0)}°C</h2>
-                    </div>
-                    <p className="font-light">
-                        {currentWeatherConditionTranslate()}
-                    </p>
                 </div>
                 <div className="flex flex-row w-3/4 justify-around">
                     <div className="flex flex-col items-center gap-2">
