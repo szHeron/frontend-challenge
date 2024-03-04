@@ -16,7 +16,7 @@ export default function ForecastCard({data}:{data: IWeatherForecast}){
     }
     
     return (
-        <div className="flex flex-row w-1/2 justify-between items-center">
+        <div className="flex flex-row w-[90%] justify-between items-center">
             <div className="flex flex-col">
                 <p>{dayName()}</p>
                 <p>{formatDate("date", data.dt_txt)}</p>
