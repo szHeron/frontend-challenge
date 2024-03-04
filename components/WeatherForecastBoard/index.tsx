@@ -13,6 +13,7 @@ interface IWeatherForecastBoard {
 }
 
 export default function WeatherForecastBoard({city, state, currentWeather, currentForecastWeather, nextForecastWeather}: IWeatherForecastBoard){
+
     return (
         <div className="flex flex-row w-full h-full gap-4 ml-4 p-4">
             <div className="flex flex-col w-full h-full gap-4">
