@@ -13,17 +13,17 @@ export default function AutoCompleteByCEP({onChangeCep, autoCompleteCep, value, 
     const [errorText, setErrorText] = useState("")
 
     function handleCepChange(event: ChangeEvent<HTMLInputElement>){
-        const notFormattedCep = event.target.value
-        const formattedCep = notFormattedCep.replace("-","")
+        const cep = event.target.value
+        if(/^\d+$/.test(cep) || cep.length === 0){
+            onChangeCep(cep)
+        }
 
-        onChangeCep(formattedCep)
-        validationCep(formattedCep)
+        if(cep.length === 8 )
+            validationCep(cep)
+            
     }
 
     async function validationCep(cep: string){
-        if(cep.length < 8)
-            return;
-
         const cepData = await GetCep(cep);
 
         if(!cepData){
