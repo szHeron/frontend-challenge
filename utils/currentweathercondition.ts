@@ -6,16 +6,18 @@ import night from "@/assets/noite.png"
 import sun from "@/assets/ensolarado.png"
 
 export default function currentWeatherCondition(weather: string, date?: string){
-    const hour = dayjs(date);
+    const hour = dayjs(date).hour();
 
     if(weather.includes("rain")){
         return rain
     }else if(weather.includes("thunderstorm")){
         return thunderstorm
     }else if(weather.indexOf("clouds") !== -1){
+        if(hour > 18 || hour < 5)
+            return night
         return cloudy
     }else{
-        if(hour && (hour.isAfter('18:00') && hour.isBefore('05:00')))
+        if(hour > 18 || hour < 5)
             return night
         return sun
     }
