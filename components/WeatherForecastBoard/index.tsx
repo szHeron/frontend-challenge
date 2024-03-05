@@ -29,7 +29,7 @@ export default function WeatherForecastBoard({city, state, currentWeather, curre
             </div>
             <div className="flex flex-col w-[45%] h-full gap-4">
                 <CurrentLocationMap lat={currentWeather.coord.lat} lon={currentWeather.coord.lon}/>
-                <p className="font-medium text-lg border-b-2 border-b-blue-500 mt-6">Próximos 5 dias.</p>
+                <p className="font-medium text-lg border-b-2 border-b-blue-500 mt-6">Próximos dias.</p>
                 <div className="flex flex-col items-start gap-2 w-full h-[60%] pl-8">
                     {
                         nextForecastWeather.map((data, index) =>{

@@ -23,7 +23,7 @@ export default function ForecastCard({data}:{data: IWeatherForecast}){
             </div>
             <div className="flex flex-row gap-2 items-center">
                 <p>{data.main.temp.toFixed(0)}°</p>
-                <Image width={40} height={40} src={currentWeatherCondition(weather)} alt="ilustração do tempo"/>
+                <Image width={40} height={40} src={currentWeatherCondition(weather, data.dt_txt)} alt="ilustração do tempo"/>
             </div>
         </div>
     )
